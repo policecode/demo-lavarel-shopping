@@ -1,0 +1,62 @@
+.img-size {
+	width: 120px !important;
+	height: 120px !important;
+}
+
+.box_setting {
+	display: block;
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	border-radius: 10%;
+	height: 250px;
+}
+.box_setting-img {
+	width: 100%;
+	height: 100%
+}
+.box_setting-content{
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	bottom: 50%;
+	left: 50%;
+	opacity: 0;
+	font-size: 28px;
+	text-transform: uppercase;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.4s ease;
+}
+
+.box_setting:hover .box_setting-content{
+	bottom: 0;
+	right:0;
+	top: 0;
+	left: 0;
+	opacity: 0.8;
+
+}
+.box_setting.color-0 .box_setting-content{
+	background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(139, 19, 175));
+}
+.box_setting.color-1 .box_setting-content{
+	background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(152, 19, 175));
+}
+.box_setting.color-2 .box_setting-content{
+	background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(63, 19, 175));
+}
+.box_setting.color-3 .box_setting-content{
+	background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(19, 19, 175));
+}
+.box_setting.color-4 .box_setting-content{
+	background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(19, 105, 175));
+}
+.box_setting.color-5 .box_setting-content{
+	background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(19, 175, 149));
+}
+.mb-4 {
+	margin-bottom: 40px;
+}

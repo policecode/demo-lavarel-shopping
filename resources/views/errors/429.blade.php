@@ -1,0 +1,1 @@
+<h1>Hạn chế việc truy cập liên tục</h1>
