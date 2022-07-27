@@ -91,6 +91,9 @@ class DatabaseSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
             'name' => 'Nội dung thông tin cần chia sẻ 2'
         ]);
+        // for ($i=0; $i < 70; $i++) { 
+        //     # code...
+        // }
 
         // for ($i=0; $i < 70; $i++) { 
         //     $faker = Factory::create();
