@@ -8,6 +8,8 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\client\HomeClientController;
+use App\Http\Controllers\client\DetailController;
+use App\Http\Controllers\client\ShopController;
 use Faker\Factory;
 
 /*
@@ -20,12 +22,17 @@ use Faker\Factory;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Trang chủ
+Route::get('/',[HomeClientController::class, 'index'])->name('home');
+Route::post('/dang-ky-nhan-tin',[HomeClientController::class, 'signUpFor'])->name('dang-ky-nhan-tin');
+// Trang cửa hàng
+Route::get('/shop',[ShopController::class, 'getShopping'])->name('shopping');
 
-Route::get('/',[HomeClientController::class, 'index']);
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Trang chi tiết sản phẩm
+Route::prefix('san-pham')->name('san-pham')->group(function(){
+    Route::get('/{id}',[DetailController::class, 'detailProduct'])->name('.detail');
+    Route::post('/comment',[DetailController::class, 'commentProduct'])->name('.comment');
+});
 
 require __DIR__.'/auth.php';
 

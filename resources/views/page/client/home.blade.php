@@ -7,7 +7,7 @@
 
 {{-- Main-wrap Start --}}
 @section('main-wrap')
-    <div id="content">
+    
 
         <!-- New Arrival -->
         <section class="padding-top-100 padding-bottom-100">
@@ -33,11 +33,11 @@
                             <div class="overlay">
                                 <!-- Price -->
                                 <span class="price"><small>VNĐ</small>{{ number_format($item->price) }}</span>
-                                <div class="position-center-center"> <a href="images/item-img-1-1.jpg" data-lighter><i
+                                <div class="position-center-center"> <a href="{{ $item->feature_image_path }}" data-lighter><i
                                             class="icon-magnifier"></i></a> </div>
                             </div>
                             <!-- Item Name -->
-                            <div class="item-name"> <a href="#.">{{ $item->name }}</a>
+                            <div class="item-name"> <a href="{{route('san-pham.detail', ['id' => $item->id])}}">{{ $item->name }}</a>
                                 <p>Lorem ipsum dolor sit amet</p>
                             </div>
                         </div>
@@ -64,8 +64,8 @@
                             <!-- Item -->
                             <div class="item">
                                 <!-- Item img -->
-                                <div class="item-img"> 
-                                    <img class="img-1" src="{{ $item->feature_image_path }}" alt=""> 
+                                <div class="item-img">
+                                    <img class="img-1" src="{{ $item->feature_image_path }}" alt="">
                                     <img class="img-2" src="{{ $item->feature_image_path }}" alt="">
                                     <!-- Overlay -->
                                     <div class="overlay">
@@ -80,8 +80,8 @@
                                     </div>
                                 </div>
                                 <!-- Item Name -->
-                                <div class="item-name"> 
-                                    <a href="#.">{{ $item->name }}</a>
+                                <div class="item-name">
+                                    <a href="{{route('san-pham.detail', ['id' => $item->id])}}">{{ $item->name }}</a>
                                     <p>Lorem ipsum dolor sit amet</p>
                                 </div>
                                 <!-- Price -->
@@ -97,7 +97,12 @@
         <!-- Knowledge Share -->
         <section class="light-gray-bg padding-top-150 padding-bottom-150">
             <div class="container">
-
+                @php
+                    $content1 = getOptionSetting('knowledgesharecontent1', 'opt_value');
+                    $date1 = getOptionSetting('knowledgesharecontent1', 'created_at');
+                    $content2 = getOptionSetting('knowledgesharecontent2', 'opt_value');
+                    $date2 = getOptionSetting('knowledgesharecontent2', 'created_at');
+                @endphp
                 <!-- Main Heading -->
                 <div class="heading text-center">
                     <h4>{{ getOptionSetting('knowledgeshare', 'name') }}</h4>
@@ -108,19 +113,27 @@
 
                         <!-- Post 1 -->
                         <li class="col-md-6">
-                            <div class="date"> <span>December</span> <span class="huge">27</span> </div>
-                            <a href="#.">Donec commo is vulputate</a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus maximus vehicula. Sed
-                                feugiat, tellus vel tristique posuere, diam</p>
+                            <div class="date">
+                                <span>{{date('M', strtotime($date1))}}</span>
+                                <span class="huge">{{date('d', strtotime($date1))}}</span> 
+                            </div>
+                            <a href="{{ !empty($content1['link']) ? $content1['link'] : false }}">
+                                {{ !empty($content1['title']) ? $content1['title'] : false }}
+                            </a>
+                            <p>{!! !empty($content1['content']) ? $content1['content'] : false !!}</p>
                             <span>By <strong>Admin</strong></span>
                         </li>
 
                         <!-- Post 2 -->
                         <li class="col-md-6">
-                            <div class="date"> <span>December</span> <span class="huge">09</span> </div>
-                            <a href="#.">Donec commo is vulputate</a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus maximus vehicula. Sed
-                                feugiat, tellus vel tristique posuere, diam</p>
+                            <div class="date">
+                                <span>{{date('M', strtotime($date2))}}</span>
+                                <span class="huge">{{date('d', strtotime($date2))}}</span> 
+                            </div>
+                            <a href="{{ !empty($content2['link']) ? $content2['link'] : false }}">
+                                {{ !empty($content2['title']) ? $content2['title'] : false }}
+                            </a>
+                            <p>{!! !empty($content2['content']) ? $content2['content'] : false !!}</p>
                             <span>By <strong>Admin</strong></span>
                         </li>
                     </ul>
@@ -140,25 +153,17 @@
 
                 <!-- Social Icons -->
                 <ul class="social_icons">
-                    <li><a href="{{ getOptionSetting('facebook', 'opt_value') }}" target="_blank"><i class="icon-social-facebook" ></i></a></li>
-                    <li><a href="{{ getOptionSetting('twitter', 'opt_value') }}" target="_blank"><i class="icon-social-twitter" ></i></a></li>
-                    <li><a href="{{ getOptionSetting('youtube', 'opt_value') }}" target="_blank"><i class="icon-social-youtube" ></i></a></li>
+                    <li><a href="{{ getOptionSetting('facebook', 'opt_value') }}" target="_blank"><i
+                                class="icon-social-facebook"></i></a></li>
+                    <li><a href="{{ getOptionSetting('twitter', 'opt_value') }}" target="_blank"><i
+                                class="icon-social-twitter"></i></a></li>
+                    <li><a href="{{ getOptionSetting('youtube', 'opt_value') }}" target="_blank"><i
+                                class="icon-social-youtube"></i></a></li>
                 </ul>
             </div>
         </section>
-        <section class="news-letter padding-top-150 padding-bottom-150">
-            <div class="container">
-                <div class="heading light-head text-center margin-bottom-30">
-                    <h4>{{ getOptionSetting('newsletter', 'name') }}</h4>
-                    <span>{{ getOptionSetting('newsletter', 'opt_value') }}</span>
-                </div>
-                <form>
-                    <input type="email" placeholder="nhập địa chỉ email của bạn" required>
-                    <button type="submit">Gửi đi</button>
-                </form>
-            </div>
-        </section>
-    </div>
+
+    
 @endsection
 {{-- Main-wrap End --}}
 

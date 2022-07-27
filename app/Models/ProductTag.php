@@ -13,7 +13,8 @@ class ProductTag extends Model
 
     public function getProductTag($productId) {
         $productTag = DB::table($this->table)
-        ->select('id', 'tag_id')
+        ->select('tag_id', 'name')
+        ->join('tags', $this->table.'.tag_id', '=', 'tags.id')
         ->where('product_id', $productId)
         ->get();
         return $productTag;

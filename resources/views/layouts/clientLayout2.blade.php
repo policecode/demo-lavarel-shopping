@@ -6,7 +6,7 @@
     @include('layouts.listClient.headerNavbar')
     <!--======= HOME MAIN SLIDER =========-->
     
-    @include('layouts.listClient.slider')
+    @include('layouts.listClient.slider2')
     <div id="content">
 
         @yield('main-wrap')

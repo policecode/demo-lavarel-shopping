@@ -12,37 +12,9 @@
           <!-- NAV -->
           <div class="collapse navbar-collapse" id="nav-open-btn">
             <ul class="nav">
-              <li class="dropdown active"> <a href="#." class="dropdown-toggle" data-toggle="dropdown">Home</a>
-                {{-- <ul class="dropdown-menu">
-                  <li> <a href="index.html">Index Default</a> </li>
-                  <li> <a href="index-1.html">Index 2</a> </li>
-                  <li> <a href="index-2.html">Index 3</a></li>
-                  <li> <a href="index-header-1.html">Index Header 1</a></li>
-                  <li> <a href="index-header-2.html">Index Header 2</a></li>
-                  <li> <a href="index-header-3.html">Index Header 3</a></li>
-                  <li> <a href="index-header-4.html">Index Header 4</a></li>
-                </ul> --}}
+              <li class="dropdown {{$active=='home'?'active':false}}"> <a href="{{route('home')}}">Trang chủ</a>
               </li>
-              {{-- <li class="dropdown"> <a href="#." class="dropdown-toggle" data-toggle="dropdown">Pages</a>
-                <ul class="dropdown-menu">
-                  <li> <a href="shop_01.html">Shop 01 </a> </li>
-                  <li> <a href="shop_02.html">Shop 02</a> </li>
-                  <li> <a href="shop_03.html">Shop 03 </a> </li>
-                  <li> <a href="shop_04.html">Shop 04 </a> </li>
-                  <li> <a href="product-detail_01.html">Product Detail 01</a> </li>
-                  <li> <a href="product-detail_02.html">Product Detail 02</a> </li>
-                  <li> <a href="shopping-cart.html">Shopping Cart</a> </li>
-                  <li> <a href="checkout.html">Checkout</a> </li>
-                  <li> <a href="about-us_01.html">About 01</a> </li>
-                  <li> <a href="about-us_02.html">About 02</a> </li>
-                  <li> <a href="contact.html">Contact</a> </li>
-                  <li> <a href="blog-list_01.html">Blog List 01</a> </li>
-                  <li> <a href="blog-list_02.html">Blog List 02</a> </li>
-                  <li> <a href="blog-list_03.html">Blog List 03 </a> </li>
-                  <li> <a href="blog-detail_01.html">Blog Detail 01 </a> </li>
-                </ul>
-              </li>
-              <li> <a href="about-us_01.html">About </a> </li> --}}
+              <li class="dropdown {{$active=='shop'?'active':false}}"> <a href="{{route('shopping')}}">Cửa hàng </a> </li>
               
               <!-- Two Link Option -->
               {{-- <li class="dropdown"> <a href="#." class="dropdown-toggle" data-toggle="dropdown">Designer</a>
@@ -149,15 +121,8 @@
             <ul class="navbar-right">
               
               <!-- USER INFO -->
-              <li class="dropdown user-acc"> <a href="{{ route('admin.home') }}" class="dropdown-toggle" ><i class="icon-user"></i> </a>
-                {{-- <ul class="dropdown-menu">
-                  <li>
-                    <h6>HELLO! Jhon Smith</h6>
-                  </li>
-                  <li><a href="#">MY CART</a></li>
-                  <li><a href="#">ACCOUNT INFO</a></li>
-                  <li><a href="#">LOG OUT</a></li>
-                </ul> --}}
+              <li class="dropdown user-acc" title="Trang quản trị"> <a href="{{ route('admin.home') }}" class="dropdown-toggle" ><i class="icon-user"></i> </a>
+               
               </li>
               
               <!-- USER BASKET -->

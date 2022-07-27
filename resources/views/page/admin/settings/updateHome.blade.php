@@ -157,7 +157,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>{{ getOptionSetting('newsletter', 'name') }}</label>
-                                                <textarea type="text" class="form-control" name="newsletter"
+                                                <textarea type="text" class="form-control editor" name="newsletter"
                                                     placeholder="{{ getOptionSetting('newsletter', 'name') }}">
                                                 {{ getOptionSetting('newsletter', 'opt_value') }}
                                             </textarea>
@@ -165,6 +165,58 @@
                                         </div>
                                     @endif
 
+                                </div>
+                                <div class="row">
+                                    <h3>Thông tin chia sẻ</h3>
+                                    @if (!empty(getOptionSetting('knowledgesharecontent1')))
+                                        @php
+                                            $content1 = getOptionSetting('knowledgesharecontent1', 'opt_value');
+                                        @endphp
+                                        <div class="col-md-6">
+                                            <h5>{{ getOptionSetting('knowledgesharecontent1', 'name') }}</h5>
+                                            <div class="form-group">
+                                                <label>Tiêu đề</label>
+                                                <input type="text" class="form-control"
+                                                    name="knowledgesharecontent1[title]" placeholder=""
+                                                    value="{{ !empty($content1['title']) ? $content1['title'] : false }}">
+                                                <hr>
+                                                <label>Đường link dẫn tới bài viết</label>
+                                                <input type="text" class="form-control"
+                                                    name="knowledgesharecontent1[link]" placeholder=""
+                                                    value="{{ !empty($content1['link']) ? $content1['link'] : false }}">
+                                                <hr>
+                                                <label>Nội dung cần chia sẻ</label>
+                                                <textarea type="text" class="form-control editor" name="knowledgesharecontent1[content]">
+                                                    {{ !empty($content1['content']) ? $content1['content'] : false }}
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if (!empty(getOptionSetting('knowledgesharecontent2')))
+                                        @php
+                                            $content2 = getOptionSetting('knowledgesharecontent2', 'opt_value');
+                                        @endphp
+                                        <div class="col-md-6">
+                                            <h5>{{ getOptionSetting('knowledgesharecontent2', 'name') }}</h5>
+                                            <div class="form-group">
+                                                <label>Tiêu đề</label>
+                                                <input type="text" class="form-control"
+                                                    name="knowledgesharecontent2[title]" placeholder=""
+                                                    value="{{ !empty($content2['title']) ? $content2['title'] : false }}">
+                                                <hr>
+                                                <label>Đường link dẫn tới bài viết</label>
+                                                <input type="text" class="form-control"
+                                                    name="knowledgesharecontent2[link]" placeholder=""
+                                                    value="{{ !empty($content2['link']) ? $content2['link'] : false }}">
+                                                <hr>
+                                                <label>Nội dung cần chia sẻ</label>
+                                                <textarea type="text" class="form-control editor" name="knowledgesharecontent2[content]">
+                                                {{ !empty($content2['content']) ? $content2['content'] : false }}
+                                            </textarea>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                                 <button type="submit" class="btn btn-info btn-fill pull-right">Cập nhật</button>
                                 <div class="clearfix"></div>

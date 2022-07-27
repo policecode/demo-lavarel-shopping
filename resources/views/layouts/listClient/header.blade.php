@@ -13,7 +13,7 @@
 
 <!-- Bootstrap Core CSS -->
 <link href="{{asset('assetClient/css/bootstrap.min.css')}} " rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <!-- Custom CSS -->
 <link href="{{asset('assetClient/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assetClient/css/ionicons.min.css')}}" rel="stylesheet">
@@ -22,18 +22,15 @@
 <link href="{{asset('assetClient/css/responsive.css')}}" rel="stylesheet">
 
 <!-- JavaScripts -->
-<script src="js/modernizr.js"></script>
+<script src="{{asset('assetClient/js/modernizr.js')}}"></script>
 
 <!-- Online Fonts -->
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
+<!-- fontawesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="{{asset('assetClient/css/custom.css')}}" rel="stylesheet">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 @yield('css')
 </head>
 <body>

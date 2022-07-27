@@ -121,3 +121,39 @@ function loadSlider() {
     ->get();
     return $item;
 }
+
+function renderCommentProduct($collectComment) {
+    if ($collectComment->count() > 0) {
+        foreach ($collectComment as $key => $value) {
+            if ($value->parent_id == 0) {
+                echo '<div class="media">
+                    <div class="media-body">
+                        <p class="font-playfair">'.$value->comment.'</p>
+                        <h6>'.$value->fullname.'
+                            <span class="pull-right">'.$value->created_at.'</span> 
+                        </h6>
+                        <a class="comment-icon" href="#form-comment"
+                            data-id="'.$value->id.'"
+                            data-name="'.$value->fullname.'"
+                        >
+                            <i class="fa-solid fa-comment-dots"></i> trả lời
+                        </a>
+                    </div>';
+                    
+                    $collectComment->except([$key]);
+                    foreach ($collectComment as $index => $item) {
+                        if ($item->parent_id == $value->id) {
+                            echo '<div class="media" style="padding-left: 30px;">  
+                                <div class="media-body">
+                                    <p class="font-playfair">'.$item->comment.'</p>
+                                    <h6>'.$item->fullname.' <span class="pull-right">'.$item->created_at.'</span> </h6>
+                                </div>
+                            </div>';
+                        }
+                        $collectComment->except([$index]);
+                    }
+                echo '</div>';
+            }
+        }
+    }
+}

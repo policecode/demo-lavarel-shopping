@@ -1,0 +1,42 @@
+.pagination {
+    float: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pagination > li {
+    margin-right: 6px;
+}
+.pagination > li > a {
+    height: 40px;
+	width: 40px;
+    line-height: 40px;
+    font-size: 18px;
+}
+.shop-detail .item-owner li a:hover span {
+    color: #333;
+}
+
+.comment-icon {
+    cursor: pointer;
+    margin-left: 60px;
+    margin-bottom: 20px;
+    transition: color 0.2s ease-in-out;
+}
+.comment-icon:hover i {
+    color: rgb(29, 112, 206);
+}
+.reply-to-comment span {
+    color: rgb(20, 23, 193);
+}
+.reply-to-comment i {
+    margin-left: 5px;
+    color: red;
+    cursor: pointer;
+}
+.item-decribe .media {
+    margin-bottom: 10px;
+}
+.error-newsletter {
+    color: red;
+}
