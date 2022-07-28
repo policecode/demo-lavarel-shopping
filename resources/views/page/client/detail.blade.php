@@ -54,7 +54,7 @@
                                 </li>
                             </ul>
                             <!-- Item Detail -->
-                            <p>{{ $product->content }}</p>
+                            <p>{!! $product->content !!}</p>
 
                             <!-- Short By -->
                             <div class="some-info">
