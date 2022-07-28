@@ -92,11 +92,10 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Nội dung thông tin cần chia sẻ 2'
         // ]);
 
-        for ($i=0; $i < 70; $i++) { 
+        for ($i=0; $i < 20; $i++) { 
             $faker = Factory::create();
             DB::table('categories')->insert([
                 'name' => $faker->jobTitle,
-                'parent_id' => 0,
                 'slug' => $faker->jobTitle,
                 'created_at' => date('Y-m-d H:i:s')
             ]);
@@ -124,7 +123,7 @@ class DatabaseSeeder extends Seeder
                 'feature_image_path' => $faker->imageUrl,
                 'content' =>  json_encode($faker->realText),
                 'user_id' => 1,
-                'category_id' => rand(1, 39),
+                'category_id' => rand(1, 15),
                 'created_at' => date('Y-m-d H:i:s')
             ]);
             for ($j=0; $j < 4; $j++) { 
@@ -138,7 +137,7 @@ class DatabaseSeeder extends Seeder
             for ($e=0; $e < 4; $e++) { 
                 DB::table('product_tags')->insert([
                     'product_id' => $idProduct,
-                    'tag_id' => rand(1, 63),
+                    'tag_id' => rand(1, 30),
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
             }
