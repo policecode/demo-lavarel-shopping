@@ -40,3 +40,23 @@
 .error-newsletter {
     color: red;
 }
+.dropdown-toggle::after {
+    display: none;
+}
+
+.add-product-to-cart {
+    background-color: rgb(36, 89, 169);
+    text-align: center; 
+    color: #fff;
+    position: relative;
+    top: -40px;
+    opacity: 0;
+    transition: all 0.4s linear;
+}
+.add-product-to-cart.add-cart {
+    top: 0;
+    opacity: 1;
+}
+.shopping-cart .cart-ship-info label {
+    margin-bottom: 10px;
+}

@@ -54,10 +54,10 @@
                                 </li>
                             </ul>
                             <!-- Item Detail -->
-                            <p>{!! $product->content !!}</p>
+                            <p>{!! json_decode($product->content, true) !!}</p>
 
                             <!-- Short By -->
-                            <div class="some-info">
+                            <form class="some-info">
                                 <ul class="row margin-top-30">
                                     <li class="col-xs-4">
                                         <div class="quinty">
@@ -70,29 +70,21 @@
                                         </div>
                                     </li>
 
-                                    <!-- COLORS -->
                                     <li class="col-xs-8">
-                                        <ul class="colors-shop">
-                                            <li><span class="margin-right-20">Colors</span></li>
-                                            <li><a href="#." style="background:#958170;"></a></li>
-                                            <li><a href="#." style="background:#c9a688;"></a></li>
-                                            <li><a href="#." style="background:#c9c288;"></a></li>
-                                            <li><a href="#." style="background:#a7c988;"></a></li>
-                                            <li><a href="#." style="background:#9ed66b;"></a></li>
-                                            <li><a href="#." style="background:#6bd6b1;"></a></li>
-                                            <li><a href="#." style="background:#82c2dc;"></a></li>
-                                            <li><a href="#." style="background:#8295dc;"></a></li>
-                                        </ul>
+                                        <p class="add-product-to-cart">Đã thêm sản phẩm vào giỏ hàng</p>
                                     </li>
 
                                     <!-- ADD TO CART -->
-                                    <li class="col-xs-6"> <a href="#." class="btn">ADD TO CART</a> </li>
+                                    <li class="col-xs-8">
+                                        <a href="#" data-id="{{ $product->id }}" data-token="{{ csrf_token() }}"
+                                            class="btn add-product-to-cart-js">Thêm vào giỏ hàng</a>
+                                    </li>
 
                                     <!-- LIKE -->
-                                    <li class="col-xs-6"> <a href="#." class="like-us"><i class="icon-heart"></i></a>
+                                    <li class="col-xs-4"> <a href="#." class="like-us"><i class="icon-heart"></i></a>
                                     </li>
                                 </ul>
-                            </div>
+                            </form>
                         </div>
 
                     @endif
@@ -198,8 +190,9 @@
                         <!-- Item -->
                         <div class="item">
                             <!-- Item img -->
-                            <div class="item-img"> <img class="img-1" src="{{$item->feature_image_path}}" alt=""> <img
-                                    class="img-2" src="{{$item->feature_image_path}}" alt="">
+                            <div class="item-img"> <img class="img-1" src="{{ $item->feature_image_path }}"
+                                    alt=""> <img class="img-2" src="{{ $item->feature_image_path }}"
+                                    alt="">
                                 <!-- Overlay -->
                                 <div class="overlay">
                                     <div class="position-center-center">
@@ -212,13 +205,13 @@
                                 </div>
                             </div>
                             <!-- Item Name -->
-                            <div class="item-name"> 
-                                <a href="{{route('san-pham.detail', ['id' => $item->id])}}">
-                                {{$item->name}}</a>
+                            <div class="item-name">
+                                <a href="{{ route('san-pham.detail', ['id' => $item->id]) }}">
+                                    {{ $item->name }}</a>
                                 <p>Lorem ipsum dolor sit amet</p>
                             </div>
                             <!-- Price -->
-                            <span class="price"><small>VNĐ</small>{{number_format($item->price)}}</span>
+                            <span class="price"><small>VNĐ</small>{{ number_format($item->price) }}</span>
                         </div>
                     @endforeach
                 @endif
@@ -252,5 +245,48 @@
 
 {{-- Js Start --}}
 @section('js')
+    <script>
+        function addProductToCart() {
+            let addProductToCart = document.querySelector('.add-product-to-cart-js');
+            if (addProductToCart) {
+                addProductToCart.onclick = function(e) {
+                    e.preventDefault();
+                    let data = {
+                        product_id: addProductToCart.getAttribute('data-id'),
+                        _token: addProductToCart.getAttribute('data-token')
+                    };
+                    fetch('{{ route('cart.add-product') }}', {
+                        method: 'POST', // or 'PUT'
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    })
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(response => {
+                        console.log(response);
+                        if (response.status == 'success') {
+                            let statusText = document.querySelector('.add-product-to-cart');
+                            if (statusText) {
+                                statusText.classList.add('add-cart');
+
+                                setTimeout(() =>{
+                                    if (statusText.classList.contains('add-cart')) {
+                                        statusText.classList.remove('add-cart');
+                                    }
+                                }, 2000)
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                }
+            }
+        }
+        addProductToCart();
+    </script>
 @endsection
 {{-- Js End --}}

@@ -70,12 +70,17 @@
                                     <!-- Overlay -->
                                     <div class="overlay">
                                         <div class="position-center-center">
-                                            <div class="inn"><a href="images/product-1.jpg" data-lighter><i
-                                                        class="icon-magnifier"></i></a> <a href="#."
-                                                    data-toggle="tooltip" data-placement="top" title="Add To Cart"><i
-                                                        class="icon-basket"></i></a> <a href="#." data-toggle="tooltip"
-                                                    data-placement="top" title="Add To WishList"><i
-                                                        class="icon-heart"></i></a></div>
+                                            <div class="inn">
+                                                <a href="images/product-1.jpg" data-lighter>
+                                                    <i class="icon-magnifier"></i>
+                                                </a> 
+                                                <a href="{{route('cart.add-cart', ['id' => $item->id])}}" data-toggle="tooltip" data-placement="top" title="Thêm vào giỏ hảng">
+                                                    <i class="icon-basket"></i>
+                                                </a> 
+                                                <a href="#." data-toggle="tooltip" data-placement="top" title="Add To WishList">
+                                                    <i class="icon-heart"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

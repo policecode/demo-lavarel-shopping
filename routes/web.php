@@ -10,6 +10,12 @@ use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\client\HomeClientController;
 use App\Http\Controllers\client\DetailController;
 use App\Http\Controllers\client\ShopController;
+use App\Http\Controllers\client\CartController;
+use App\Http\Controllers\client\PayController;
+// Gửi mail
+// use App\Mail\SendMail;
+// use Illuminate\Support\Facades\Mail;
+
 use Faker\Factory;
 
 /*
@@ -24,16 +30,36 @@ use Faker\Factory;
 */
 // Trang chủ
 Route::get('/',[HomeClientController::class, 'index'])->name('home');
+// Route::get('/',function () {
+//     $mailable= new SendMail();
+//     Mail::to('dat01655993202@gmail.com')->send($mailable);
+//     dd(true);
+// })->name('home');
+
 Route::post('/dang-ky-nhan-tin',[HomeClientController::class, 'signUpFor'])->name('dang-ky-nhan-tin');
 // Trang cửa hàng
 Route::get('/shop',[ShopController::class, 'getShopping'])->name('shopping');
-
 // Trang chi tiết sản phẩm
 Route::prefix('san-pham')->name('san-pham')->group(function(){
     Route::get('/{id}',[DetailController::class, 'detailProduct'])->name('.detail');
     Route::post('/comment',[DetailController::class, 'commentProduct'])->name('.comment');
 });
+// Giỏ hàng: Cart
+Route::prefix('cart')->name('cart')->group(function(){
+    Route::get('/', [CartController::class, 'getFormCart'])->name('.home');
+    Route::get('/add-product/{id}',[CartController::class, 'addProductToCart'])->name('.add-cart');
+    Route::post('/add-product',[CartController::class, 'addProduct'])->name('.add-product');
+    Route::put('/update-product/{index}',[CartController::class, 'updateProduct'])->name('.update-product');
+    Route::get('/delete-product/{index}', [CartController::class, 'deleteProduct'])->name('.delete');
 
+    // API
+    Route::get('/getApiOrderCart', [CartController::class, 'getBildCart'])->name('.apiOrderCart');
+});
+// Thanh toán
+Route::prefix('pay')->name('pay')->group(function () {
+    Route::get('/form-customer', [PayController::class, 'viewFormcustomer'])->name('.form-customer');
+    Route::post('/form-customer', [PayController::class, 'productPayment']);
+});
 require __DIR__.'/auth.php';
 
 // auth:doctor Nếu chưa đăng nhập thì không thể vào trong này

@@ -57,7 +57,7 @@
                                                 <a href="{{$item->feature_image_path}}" data-lighter>
                                                     <i class="icon-magnifier"></i>
                                                 </a> 
-                                                <a href="#.">
+                                                <a href="{{route('cart.add-cart', ['id' => $item->id])}}">
                                                     <i class="icon-basket"></i>
                                                 </a> 
                                                 <a href="#.">
@@ -127,10 +127,13 @@
             </ul>
         </div>
     </section>
+
+    
 @endsection
 {{-- Main-wrap End --}}
 
 {{-- Js Start --}}
 @section('js')
+
 @endsection
 {{-- Js End --}}
