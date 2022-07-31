@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Support\Facades\DB;
-
+use App\Trait\Cart;
 
 function loadOptions($list, $parentId = 0, $text = '', $id=0) {
     foreach ($list as $value) {
@@ -156,4 +156,9 @@ function renderCommentProduct($collectComment) {
             }
         }
     }
+}
+
+function getCountCart() {
+    $cart = new Cart();
+    return $cart->getCount();
 }

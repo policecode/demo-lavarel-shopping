@@ -57,7 +57,8 @@
                                                 <a href="{{$item->feature_image_path}}" data-lighter>
                                                     <i class="icon-magnifier"></i>
                                                 </a> 
-                                                <a href="{{route('cart.add-cart', ['id' => $item->id])}}">
+                                                <a href="{{route('cart.add-cart', ['id' => $item->id])}}"
+                                                    class="add-to-cart-js">
                                                     <i class="icon-basket"></i>
                                                 </a> 
                                                 <a href="#.">

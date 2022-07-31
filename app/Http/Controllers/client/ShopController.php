@@ -31,7 +31,6 @@ class ShopController extends Controller
         if ($request->session()->has('msg')) {
             $data['msg'] = $request->session()->pull('mug');
         }
-
         return view('page.client.shopping', $data);
 
     }

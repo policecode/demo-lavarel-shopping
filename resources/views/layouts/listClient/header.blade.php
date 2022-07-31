@@ -7,6 +7,8 @@
 <meta name="description" content="">
 <meta name="author" content="M_Adnan">
 <title>{{$title}}</title>
+<link rel="icon" type="image/png" href="{{asset('assetClient/img/computer-icons-ninja-favicon-iconfinder-avatar-png-favpng-Jku9r1TGGY4Ha6BLUXz1eL3DQ.jpg')}}"/>
+<link rel="icon" type="image/png" href="{{asset('assetClient/img/computer-icons-ninja-favicon-iconfinder-avatar-png-favpng-Jku9r1TGGY4Ha6BLUXz1eL3DQ.jpg')}}"/>
 
 <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
 <link rel="stylesheet" type="text/css" href="{{asset('assetClient/rs-plugin/css/settings.css')}}" media="screen" />

@@ -56,6 +56,8 @@ function handleShoppingCart() {
                         .then(response => {
                             if (response.status == 'success') {
                                 element.parentElement.parentElement.parentElement.parentElement.removeChild(element.parentElement.parentElement.parentElement);
+                                $count = response.countCart
+                                handleviewCountCart($count);
                             }
                         })
                         .catch(error => console.log(error));
@@ -161,3 +163,37 @@ function handlePaymentProduct() {
     }
 }
 handlePaymentProduct();
+
+// Xử lý icon thêm vào giỏ hàng 
+function handleAddToCart() {
+    let addToCartBtns = document.querySelectorAll('.add-to-cart-js');
+    if (addToCartBtns) {
+        addToCartBtns.forEach(element => {
+            element.onclick = (e) => {
+                e.preventDefault();
+                fetch(element.href)
+                    .then(response => response.json())
+                    .then(response => {
+                        $count = response.countCart
+                        handleviewCountCart($count);
+                    })
+                    .catch(error => console.log(error));
+            }
+        });
+    }
+}
+handleAddToCart();
+// Xử lý in số liệu trên nút giỏ hàng
+function handleviewCountCart($count) {
+    let viewCountCart = document.querySelector('.view-count-cart-js');
+    if (viewCountCart) {
+        if ($count > 0) {
+            viewCountCart.innerHTML = `Giỏ hàng
+                <span class="badge badge-danger">
+                    +${$count}
+                </span>`
+        } else {
+            viewCountCart.innerHTML = `Giỏ hàng`;
+        }
+    }
+}

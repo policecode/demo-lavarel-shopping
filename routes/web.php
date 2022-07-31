@@ -47,12 +47,12 @@ Route::prefix('san-pham')->name('san-pham')->group(function(){
 // Giỏ hàng: Cart
 Route::prefix('cart')->name('cart')->group(function(){
     Route::get('/', [CartController::class, 'getFormCart'])->name('.home');
-    Route::get('/add-product/{id}',[CartController::class, 'addProductToCart'])->name('.add-cart');
     Route::post('/add-product',[CartController::class, 'addProduct'])->name('.add-product');
     Route::put('/update-product/{index}',[CartController::class, 'updateProduct'])->name('.update-product');
     Route::get('/delete-product/{index}', [CartController::class, 'deleteProduct'])->name('.delete');
-
+    
     // API
+    Route::get('/add-product/{id}',[CartController::class, 'addProductToCart'])->name('.add-cart');
     Route::get('/getApiOrderCart', [CartController::class, 'getBildCart'])->name('.apiOrderCart');
 });
 // Thanh toán

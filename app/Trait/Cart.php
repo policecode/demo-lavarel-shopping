@@ -70,4 +70,13 @@ class Cart
         }
         return $total;
     }
+    // Lấy số sản phẩm trong giỏ hàng
+    public function getCount() {
+        $arrCart = $this->getAllCart();
+        if (!empty($arrCart) && is_array($arrCart)) {
+            return count($arrCart);
+        } else {
+            return 0;
+        }
+    }
 }

@@ -76,7 +76,10 @@ class CartController extends Controller
            dd($th);
         }
 
-        return redirect()->route('cart.home');
+        $respone = response()
+        ->json(['countCart' => getCountCart()])
+        ->header('Content-Type', 'application/json');
+        return $respone;
     }
 // API
     public function updateProduct(Request $request, $index) {
@@ -99,7 +102,10 @@ class CartController extends Controller
     public function deleteProduct($index) {
         try {
             $this->cart->deleteCart($index);
-            $data = ['status' => 'success'];
+            $data = [
+                'status' => 'success',
+                'countCart' => getCountCart()
+            ];
         } catch (\Throwable $th) {
             $data = ['status' => 'error'];
         }

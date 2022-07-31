@@ -74,7 +74,9 @@
                                                 <a href="images/product-1.jpg" data-lighter>
                                                     <i class="icon-magnifier"></i>
                                                 </a> 
-                                                <a href="{{route('cart.add-cart', ['id' => $item->id])}}" data-toggle="tooltip" data-placement="top" title="Thêm vào giỏ hảng">
+                                                <a href="{{route('cart.add-cart', ['id' => $item->id])}}"
+                                                    class="add-to-cart-js"
+                                                    data-toggle="tooltip" data-placement="top" title="Thêm vào giỏ hảng">
                                                     <i class="icon-basket"></i>
                                                 </a> 
                                                 <a href="#." data-toggle="tooltip" data-placement="top" title="Add To WishList">
