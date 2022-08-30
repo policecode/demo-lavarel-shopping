@@ -15,13 +15,13 @@
                   <!-- NAV -->
                   <div class="collapse navbar-collapse" id="nav-open-btn">
                       <ul class="nav">
-                          <li class="dropdown {{ $active == 'home' ? 'active' : false }}"> <a href="{{ route('home') }}">Trang
+                          <li class="dropdown {{ $active == 'home' ? 'active' : false }}"> <a href="{{ route('home') }}" class="dropdown-toggle">Trang
                                   chủ</a>
                           </li>
-                          <li class="{{ $active == 'shop' ? 'active' : false }}"> <a href="{{ route('shopping') }}">Cửa hàng
+                          <li class="{{ $active == 'shop' ? 'active' : false }}"> <a href="{{ route('shopping') }}" class="dropdown-toggle">Cửa hàng
                               </a> </li>
                           <li class="{{ $active == 'cart' ? 'active' : false }}">
-                              <a href="{{ route('cart.home') }}" class="view-count-cart-js">
+                              <a href="{{ route('cart.home') }}" class="dropdown-toggle view-count-cart-js">
                                   Giỏ hàng
                                   @if (getCountCart() > 0)
                                       <span class="badge badge-danger">

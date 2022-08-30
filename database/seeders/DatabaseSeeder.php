@@ -92,55 +92,85 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Nội dung thông tin cần chia sẻ 2'
         // ]);
 
-        for ($i=0; $i < 20; $i++) { 
-            $faker = Factory::create();
-            DB::table('categories')->insert([
-                'name' => $faker->jobTitle,
-                'slug' => $faker->jobTitle,
-                'created_at' => date('Y-m-d H:i:s')
-            ]);
-        }
+        // for ($i=0; $i < 20; $i++) { 
+        //     $faker = Factory::create();
+        //     DB::table('categories')->insert([
+        //         'name' => $faker->jobTitle,
+        //         'slug' => $faker->jobTitle,
+        //         'created_at' => date('Y-m-d H:i:s')
+        //     ]);
+        // }
 
-        for ($i=0; $i < 70; $i++) { 
-            $faker = Factory::create();
-            $tag = $faker->state;
-            $check = DB::table('tags')
-            ->where('name', $tag)
-            ->get();
-            if ($check->count() == 0) {
-                DB::table('tags')->insert([
-                    'name' => $tag,
-                    'created_at' => date('Y-m-d H:i:s')
-                ]);
-            }
-        }
+        // for ($i=0; $i < 70; $i++) { 
+        //     $faker = Factory::create();
+        //     $tag = $faker->state;
+        //     $check = DB::table('tags')
+        //     ->where('name', $tag)
+        //     ->get();
+        //     if ($check->count() == 0) {
+        //         DB::table('tags')->insert([
+        //             'name' => $tag,
+        //             'created_at' => date('Y-m-d H:i:s')
+        //         ]);
+        //     }
+        // }
 
-        for ($i=0; $i < 50; $i++) { 
-            $faker = Factory::create();
-            $idProduct = DB::table('products')->insertGetId([
-                'name' => $faker->name,
-                'price' => mt_rand(1000000, 30000000),
-                'feature_image_path' => $faker->imageUrl,
-                'content' =>  json_encode($faker->realText),
-                'user_id' => 1,
-                'category_id' => rand(1, 15),
-                'created_at' => date('Y-m-d H:i:s')
-            ]);
-            for ($j=0; $j < 4; $j++) { 
-                DB::table('product_images')->insert([
-                    'image_path' => $faker->imageUrl,
-                    'product_id' => $idProduct,
-                    'created_at' => date('Y-m-d H:i:s')
-                ]);
-            }
+        // for ($i=0; $i < 50; $i++) { 
+        //     $faker = Factory::create();
+        //     $idProduct = DB::table('products')->insertGetId([
+        //         'name' => $faker->name,
+        //         'price' => mt_rand(1000000, 30000000),
+        //         'feature_image_path' => $faker->imageUrl,
+        //         'content' =>  json_encode($faker->realText),
+        //         'user_id' => 1,
+        //         'category_id' => rand(1, 15),
+        //         'created_at' => date('Y-m-d H:i:s')
+        //     ]);
+        //     for ($j=0; $j < 4; $j++) { 
+        //         DB::table('product_images')->insert([
+        //             'image_path' => $faker->imageUrl,
+        //             'product_id' => $idProduct,
+        //             'created_at' => date('Y-m-d H:i:s')
+        //         ]);
+        //     }
 
-            for ($e=0; $e < 4; $e++) { 
-                DB::table('product_tags')->insert([
-                    'product_id' => $idProduct,
-                    'tag_id' => rand(1, 30),
-                    'created_at' => date('Y-m-d H:i:s')
-                ]);
-            }
-        }
+        //     for ($e=0; $e < 4; $e++) { 
+        //         DB::table('product_tags')->insert([
+        //             'product_id' => $idProduct,
+        //             'tag_id' => rand(1, 30),
+        //             'created_at' => date('Y-m-d H:i:s')
+        //         ]);
+        //     }
+        // }
+
+        DB::table('modules')->insert([
+            'name' => 'categories',
+            'title' => 'Danh mục sản phẩm'
+        ]);
+
+        DB::table('modules')->insert([
+            'name' => 'groups',
+            'title' => 'Phân quyền nhóm'
+        ]);
+
+        DB::table('modules')->insert([
+            'name' => 'menus',
+            'title' => 'Phân quyền nhóm'
+        ]);
+
+        DB::table('modules')->insert([
+            'name' => 'product',
+            'title' => 'Sản phẩm'
+        ]);
+        
+        DB::table('modules')->insert([
+            'name' => 'slider',
+            'title' => 'Slider'
+        ]);
+
+        DB::table('modules')->insert([
+            'name' => 'users',
+            'title' => 'Quản lý tài khoản'
+        ]);
     }
 }

@@ -29,6 +29,7 @@ class ProductController extends Controller
     }
 
     function getProduct(Request $request) {
+
         $listCategory = $this->category->getAllCategory();
         // Dữ liệu đầu vào được lưu trong session
         $request->flash();

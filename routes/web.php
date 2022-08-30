@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\MenuController;
+use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\GroupController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\SettingController;
@@ -66,40 +68,62 @@ require __DIR__.'/auth.php';
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function(){
     Route::get('/', [HomeController::class, 'getHome'])->name('home');
 
-    Route::prefix('/categories')->name('categories')->group(function(){
+    Route::prefix('/categories')->name('categories')->middleware('can:categories.view')->group(function(){
         Route::get('/', [CategoriesController::class, 'getCategory'])->name('');
-        Route::get('/add', [CategoriesController::class, 'getFormAdd'])->name('.add');
-        Route::post('/create', [CategoriesController::class, 'createCategory'])->name('.create');
-        Route::get('/{id}/update', [CategoriesController::class, 'getFormUpdate'])->name('.formUpdate');
-        Route::put('/update', [CategoriesController::class, 'updateCategory'])->name('.update');
-        Route::get('/{id}/delete', [CategoriesController::class, 'deleteCategory'])->name('.sortDelete');
+        Route::get('/add', [CategoriesController::class, 'getFormAdd'])->name('.add')->middleware('can:categories.create');
+        Route::post('/create', [CategoriesController::class, 'createCategory'])->name('.create')->middleware('can:categories.create');
+        Route::get('/{id}/update', [CategoriesController::class, 'getFormUpdate'])->name('.formUpdate')->middleware('can:categories.edit');
+        Route::put('/update', [CategoriesController::class, 'updateCategory'])->name('.update')->middleware('can:categories.edit');
+        Route::get('/{id}/delete', [CategoriesController::class, 'deleteCategory'])->name('.sortDelete')->middleware('can:categories.delete');
     });
 
-    Route::prefix('/menu')->name('menu')->group(function(){
-        Route::get('/', [MenuController::class, 'getMenu'])->name('');
-        Route::get('/add', [MenuController::class, 'getFormAdd'])->name('.add');
-        Route::post('/create', [MenuController::class, 'createMenu'])->name('.create');
-        Route::get('/{id}/update', [MenuController::class, 'getFormUpdate'])->name('.formUpdate');
-        Route::put('/update', [MenuController::class, 'updateCategory'])->name('.update');
-        Route::get('/{id}/delete', [MenuController::class, 'deleteMenu'])->name('.sortDelete');
+    Route::prefix('/users')->name('users.')->middleware('can:users.view')->group(function(){
+        Route::get('/', [UserController::class, 'index'])->name('index');
+
+        Route::get('/add', [UserController::class, 'add'])->name('add')->middleware('can:users.create');
+
     });
 
-    Route::prefix('/product')->name('product')->group(function(){
+    Route::prefix('/groups')->name('groups.')->middleware('can:groups.view')->group(function(){
+        Route::get('/', [GroupController::class, 'index'])->name('index');
+
+        Route::get('/add', [GroupController::class, 'add'])->name('add')->middleware('can:groups.create');
+        Route::post('/add', [GroupController::class, 'create'])->middleware('can:groups.create');
+
+        Route::get('/edit/{group}', [GroupController::class, 'edit'])->name('edit')->middleware('can:groups.edit');
+        Route::post('/edit/{group}', [GroupController::class, 'update'])->middleware('can:groups.edit');
+
+        Route::get('/delete/{group}', [GroupController::class, 'delete'])->name('delete')->middleware('can:groups.delete');
+
+        Route::get('/permission/{group}', [GroupController::class, 'permission'])->name('permission')->middleware('can:groups.permission');
+        Route::post('/permission/{group}', [GroupController::class, 'updatePermission'])->middleware('can:groups.permission');
+    });
+
+    Route::prefix('/menu')->name('menu')->middleware('can:menus.view')->group(function(){
+        Route::get('/', [MenuController::class, 'getMenu']);
+        Route::get('/add', [MenuController::class, 'getFormAdd'])->name('.add')->middleware('can:menus.create');
+        Route::post('/create', [MenuController::class, 'createMenu'])->name('.create')->middleware('can:menus.create');
+        Route::get('/{id}/update', [MenuController::class, 'getFormUpdate'])->name('.formUpdate')->middleware('can:menus.edit');
+        Route::put('/update', [MenuController::class, 'updateCategory'])->name('.update')->middleware('can:menus.edit');
+        Route::get('/{id}/delete', [MenuController::class, 'deleteMenu'])->name('.sortDelete')->middleware('can:menus.delete');
+    });
+
+    Route::prefix('/product')->name('product')->middleware('can:product.view')->group(function(){
         Route::get('/', [ProductController::class, 'getProduct'])->name('.list');
-        Route::get('/add', [ProductController::class, 'getFormAdd'])->name('.add');
-        Route::post('/add', [ProductController::class, 'createProduct']);
-        Route::get('/{id}/update', [ProductController::class, 'getFormUpdate'])->name('.formUpdate');
-        Route::put('/update', [ProductController::class, 'updateProduct'])->name('.update');
-        Route::delete('/delete', [ProductController::class, 'deleteProduct'])->name('.sortDelete');
+        Route::get('/add', [ProductController::class, 'getFormAdd'])->name('.add')->middleware('can:product.create');
+        Route::post('/add', [ProductController::class, 'createProduct'])->middleware('can:product.create');
+        Route::get('/{id}/update', [ProductController::class, 'getFormUpdate'])->name('.formUpdate')->middleware('can:product.edit');
+        Route::put('/update', [ProductController::class, 'updateProduct'])->name('.update')->middleware('can:product.edit');
+        Route::delete('/delete', [ProductController::class, 'deleteProduct'])->name('.sortDelete')->middleware('can:product.delete');
     });
 
-    Route::prefix('/slider')->name('slider')->group(function(){
+    Route::prefix('/slider')->name('slider')->middleware('can:slider.view')->group(function(){
         Route::get('/', [SliderController::class, 'getSlider'])->name('.list');
-        Route::get('/add', [SliderController::class, 'getFormAdd'])->name('.add');
-        Route::post('/add', [SliderController::class, 'createSlider']);
-        Route::get('/{id}/update', [SliderController::class, 'getFormUpdate'])->name('.formUpdate');
-        Route::put('/update', [SliderController::class, 'updateSlider'])->name('.update');
-        Route::delete('/delete', [SliderController::class, 'deleteSlider'])->name('.sortDelete');
+        Route::get('/add', [SliderController::class, 'getFormAdd'])->name('.add')->middleware('can:slider.create');
+        Route::post('/add', [SliderController::class, 'createSlider'])->middleware('can:slider.create');
+        Route::get('/{id}/update', [SliderController::class, 'getFormUpdate'])->name('.formUpdate')->middleware('can:slider.edit');
+        Route::put('/update', [SliderController::class, 'updateSlider'])->name('.update')->middleware('can:slider.edit');
+        Route::delete('/delete', [SliderController::class, 'deleteSlider'])->name('.sortDelete')->middleware('can:slider.delete');
     });
 
     Route::prefix('/settings')->name('settings')->group(function(){

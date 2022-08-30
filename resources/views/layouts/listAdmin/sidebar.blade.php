@@ -45,6 +45,18 @@
                         <p>Slider</p>
                     </a>
                 </li>
+                <li class="{{!empty($active)&&$active=='user'?'active':false}}">
+                    <a href="{{route('admin.users.index')}}">
+                        <i class="pe-7s-user"></i>
+                        <p>Quản lý tài khoản</p>
+                    </a>
+                </li>
+                <li class="{{!empty($active)&&$active=='groups'?'active':false}}">
+                    <a href="{{route('admin.groups.index')}}">
+                        <i class="pe-7s-users"></i>
+                        <p>Quản lý nhóm</p>
+                    </a>
+                </li>
                 <li class="{{!empty($active)&&$active=='settings'?'active':false}}">
                     <a href="{{route('admin.settings.home')}}">
                         <i class="pe-7s-settings"></i>

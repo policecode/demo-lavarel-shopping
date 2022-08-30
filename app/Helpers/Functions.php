@@ -162,3 +162,19 @@ function getCountCart() {
     $cart = new Cart();
     return $cart->getCount();
 }
+
+function isRole($permissionArr, $module, $action){
+/**
+ * $permissionArr: Mảng chứa các chức năng phân quyền
+ * $module: 
+ * $action: Hành động muốn thực hiện - view, create, edit, delete, permission
+ */
+    if (!empty($permissionArr)) {
+        if (!empty($permissionArr[$module])) {
+            if (in_array($action, $permissionArr[$module])) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
