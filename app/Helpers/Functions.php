@@ -103,7 +103,7 @@ function handleRenderPagination($currentPage, $pageNumber){
 }
 
 // Xử lý tạo url phần paging
-function handleUrlPaging($queryArr = [], $pageIndex) {
+function handleUrlPaging($queryArr, $pageIndex) {
     $url = '?_page='.$pageIndex;
     if (!empty($queryArr)) {
         foreach ($queryArr as $key => $value) {
