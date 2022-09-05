@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\DetailController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\PayController;
 
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\LoginController;
@@ -45,11 +46,11 @@ Route::prefix('cart')->group(function(){
     // Route::get('/getApiOrderCart', [CartController::class, 'getBildCart']);
     // Route::get('/delete-product/{index}', [CartController::class, 'deleteProduct']);
 });
-// // Thanh toán
-// Route::prefix('pay')->name('pay')->group(function () {
-//     Route::get('/form-customer', [PayController::class, 'viewFormcustomer']);
-//     Route::post('/form-customer', [PayController::class, 'productPayment']);
-// });
+// Thanh toán
+Route::prefix('pay')->name('pay')->group(function () {
+    // Route::get('/form-customer', [PayController::class, 'viewFormcustomer']);
+    Route::post('/', [PayController::class, 'getPay']);
+});
 
 Route::prefix('auth')->group(function () {
     Route::post('/register', [RegisterController::class, 'create']);
