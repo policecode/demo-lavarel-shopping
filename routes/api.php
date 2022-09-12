@@ -60,4 +60,7 @@ Route::prefix('auth')->group(function () {
     Route::get('/visit', [LoginController::class, 'visit'])->middleware('auth:sanctum');
 
     Route::get('/delete', [LoginController::class, 'deleteToken'])->middleware('auth:sanctum');
+
+    Route::get('/check-login', [LoginController::class, 'checkLogin']);
+
 });

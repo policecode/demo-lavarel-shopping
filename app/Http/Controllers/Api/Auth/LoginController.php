@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Sanctum\PersonalAccessToken;
+
 class LoginController extends Controller
 {
     public function login(Request $request){
@@ -29,7 +31,7 @@ class LoginController extends Controller
         $validation = Validator::make($request->all(), $rule, $message, $attribute);
         if ($validation->fails()) {
             return [
-                'status' => 'errorsRegister',
+                'status' => 'errorsLogin',
                 'errors' => $validation->errors(),
                ];
         } else {
@@ -53,13 +55,32 @@ class LoginController extends Controller
         }
     }
 
-    public function visit() {
-        return 'Success';
-    }
-
+    
     public function deleteToken(Request $request) {
         $user = Auth::user();
         // return $user->currentAccessToken();
         return $user->tokens()->delete();
+    }
+    
+    public function visit() {
+        return [
+            'status' => 'Success'
+        ];
+    }
+
+    public function checkLogin(Request $request) {
+        if ($request->header('authorization')) {
+            $hashToken = $request->header('authorization');
+            $hashToken = str_replace('Bearer', '', $hashToken);
+            $hashToken = trim($hashToken);
+            if (PersonalAccessToken::findToken($hashToken)) {
+                return ['status' => 'success'];
+            } else {
+                return ['status' => 'no_login'];
+            }
+        } else {
+            return ['status' => 'no_login'];
+        }
+        
     }
 }
