@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\PayController;
 
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\LoginController;
-
+use App\Http\Controllers\Api\Admin\SettingController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -62,5 +62,11 @@ Route::prefix('auth')->group(function () {
     Route::get('/delete', [LoginController::class, 'deleteToken'])->middleware('auth:sanctum');
 
     Route::get('/check-login', [LoginController::class, 'checkLogin']);
+
+});
+// ->middleware('authApi')
+Route::prefix('admin')->group(function () {
+    Route::get('setting',[SettingController::class, 'index']);
+    Route::post('setting',[SettingController::class, 'updateHomePage']);
 
 });
