@@ -64,8 +64,8 @@ Route::prefix('auth')->group(function () {
     Route::get('/check-login', [LoginController::class, 'checkLogin']);
 
 });
-// ->middleware('authApi')
-Route::prefix('admin')->group(function () {
+
+Route::prefix('admin')->middleware('authApi')->group(function () {
     Route::get('setting',[SettingController::class, 'index']);
     Route::post('setting',[SettingController::class, 'updateHomePage']);
 
