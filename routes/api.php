@@ -11,6 +11,8 @@ use App\Http\Controllers\Api\PayController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Admin\SettingController;
+use App\Http\Controllers\Api\Admin\MenuController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -69,4 +71,6 @@ Route::prefix('admin')->middleware('authApi')->group(function () {
     Route::get('setting',[SettingController::class, 'index']);
     Route::post('setting',[SettingController::class, 'updateHomePage']);
 
+    Route::get('menus',[MenuController::class, 'index']);
+    Route::post('menus',[MenuController::class, 'postMenu']);
 });
