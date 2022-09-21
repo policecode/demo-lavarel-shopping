@@ -74,3 +74,5 @@ Route::prefix('admin')->middleware('authApi')->group(function () {
     Route::get('menus',[MenuController::class, 'index']);
     Route::post('menus',[MenuController::class, 'postMenu']);
 });
+
+Route::get('menu-list',[MenuController::class, 'index']);
